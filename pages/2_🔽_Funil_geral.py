@@ -14,10 +14,10 @@ st.set_page_config(
 @st.cache_data
 def load_data():
     # Carregar e processar os dados
-    df = pd.read_parquet("C:/Users/ControlDesk/OneDrive/Documentos/01.cobrança/01.bases/base_discados.parquet")
-    df_ajustes = pd.read_excel("C:/Users/ControlDesk/OneDrive/Documentos/01.cobrança/01.bases/base_ajustes.xlsx", sheet_name='ajuste_qualificação')
-    df_acordos = pd.read_csv("C:/Users/ControlDesk/OneDrive/Documentos/01.cobrança/01.bases/base_acordos.csv", sep=';')
-    df_carteira = pd.read_parquet("C:/Users/ControlDesk/OneDrive/Documentos/01.cobrança/01.bases/base_carteira.parquet")
+    df = pd.read_parquet('https://drive.google.com/uc?id=1If7dvtEtLWU1wwmjzFBUvXvSVk-gJKOc')
+    df_ajustes = pd.read_csv('https://drive.google.com/uc?id=1_4rrYDBhTcQffC55XxRUwiPueauhp3KG', encoding='Latin - 1', sep=';', low_memory=False)
+    df_acordos = pd.read_csv('https://drive.google.com/uc?id=1QiN_cQgpJsEOKs8aFUmXsDP0w82zl6lo', sep=';', low_memory=False)
+    df_carteira = pd.read_parquet('https://drive.google.com/uc?id=1LfEaWdHd3HtykKzQnvGMDwoeQFhWlDt3')
 
     df_acordos['Data Cadastro Negociação'] = pd.to_datetime(df_acordos['Data Cadastro Negociação'], format='%d/%m/%Y')
     df_carteira['data'] = pd.to_datetime(df_carteira['data'], format='%d/%m/%Y')

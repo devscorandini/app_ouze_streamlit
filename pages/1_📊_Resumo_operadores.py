@@ -5,7 +5,7 @@ from streamlit_echarts import st_echarts
 # Função para carregar os dados com cache
 @st.cache_data
 def carregar_dados():
-    df1 = pd.read_csv("C:/Users/ControlDesk/OneDrive/Documentos/01.cobrança/01.bases/base_acordos.csv", sep=';', low_memory=False)
+    df1 = pd.read_csv('https://drive.google.com/uc?id=1QiN_cQgpJsEOKs8aFUmXsDP0w82zl6lo', sep=';', low_memory=False)
     return df1
 
 # Carregar os dados
