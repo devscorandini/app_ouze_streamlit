@@ -27,7 +27,7 @@ def load_data():
 # Caixa de seleção na lateral
 opcao = st.sidebar.radio(
     'Escolha uma opção:',
-    ('Geral', 'Único')
+    ('Único', 'Geral')
 )
 
 @st.cache_data
