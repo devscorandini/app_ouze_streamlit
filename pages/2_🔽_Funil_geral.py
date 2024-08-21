@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import pyecharts.options as opts
 from pyecharts.charts import Funnel
-
+import streamlit.components.v1 as components
 
 
 st.set_page_config(
@@ -183,6 +183,6 @@ st.markdown(
 
 st.markdown('<div class="centered">', unsafe_allow_html=True)
 
-st.components.v1.html(funnel_2_1_html, height=600, width=1000)
-st.components.v1.html(funnel_2_2_html, height=600, width=1000)
-st.components.v1.html(funnel_3_html, height=600, width=1000)
+components.html(funnel_2_1_html, height=600, width=1000)
+components.html(funnel_2_2_html, height=600, width=1000)
+components.html(funnel_3_html, height=600, width=1000)
