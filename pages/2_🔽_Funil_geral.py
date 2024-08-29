@@ -30,7 +30,7 @@ opcao = st.sidebar.radio(
     ('Único', 'Geral')
 )
 
-@st.cache_data
+
 def process_data(df, df_ajustes, df_acordos, df_carteira, data_inicial, data_final, opcao):
     df = df[(df['data'] >= data_inicial) & (df['data'] <= data_final)]
     df_acordos = df_acordos[(df_acordos['Data Cadastro Negociação'] >= data_inicial) & (df_acordos['Data Cadastro Negociação'] <= data_final)]
