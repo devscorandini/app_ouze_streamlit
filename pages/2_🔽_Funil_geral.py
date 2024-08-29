@@ -112,7 +112,7 @@ data_inicial = pd.to_datetime(input1, format='%Y-%m-%d')
 data_final = pd.to_datetime(input2, format='%Y-%m-%d')
 
 funil = process_data(df, df_ajustes, df_acordos, df_carteira, data_inicial, data_final, opcao)
-
+funil = funil[['carteira', 'discados', 'alo', 'cpc', 'cpca', 'acordos']]
 
 # Preparar os dados
 st.table(funil)
