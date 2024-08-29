@@ -95,19 +95,6 @@ def process_data(df, df_ajustes, df_acordos, df_carteira, data_inicial, data_fin
 
     return table
 
-def create_funnel_chart(data, title):
-    return (
-        Funnel()
-        .add(
-            series_name="",
-            data_pair=data,
-            gap=2,
-            tooltip_opts=opts.TooltipOpts(trigger="item", formatter="{a} <br/>{b} : {c}%"),
-            label_opts=opts.LabelOpts(is_show=True, position="inside"),
-            itemstyle_opts=opts.ItemStyleOpts(border_color="#fff", border_width=1),
-        )
-        .set_global_opts(title_opts=opts.TitleOpts(title=title, subtitle=""))
-    )
 
 # Inputs da sidebar
 st.sidebar.header('Configurações de Data')
@@ -128,61 +115,4 @@ funil = process_data(df, df_ajustes, df_acordos, df_carteira, data_inicial, data
 
 
 # Preparar os dados
-linhas = {}
-for i, row in funil.iterrows():
-    key = str(row['faixa_atraso'])
-    linhas[key] = row[1:].tolist()
-
-titulos_colunas = funil.columns[funil.columns != 'faixa_atraso'].tolist()
-
-linha_2_1 = linhas.get("2.1", [0] * len(titulos_colunas))
-linha_2_2 = linhas.get("2.2", [0] * len(titulos_colunas))
-linha_3 = linhas.get("3", [0] * len(titulos_colunas))
-
-data_2_1 = [[titulos_colunas[i], linha_2_1[i]] for i in range(len(titulos_colunas))]
-data_2_2 = [[titulos_colunas[i], linha_2_2[i]] for i in range(len(titulos_colunas))]
-data_3 = [[titulos_colunas[i], linha_3[i]] for i in range(len(titulos_colunas))]
-
-rotulo_2_1 = [f"{titulos_colunas[i]} - {linha_2_1[i]}" for i in range(len(titulos_colunas))]
-rotulo_2_2 = [f"{titulos_colunas[i]} - {linha_2_2[i]}" for i in range(len(titulos_colunas))]
-rotulo_3 = [f"{titulos_colunas[i]} - {linha_3[i]}" for i in range(len(titulos_colunas))]
-
-percentuais = [20, 68, 100, 52, 36, 84]
-
-data_2_1 = [[rotulo_2_1[i], percentuais[i]] for i in range(len(rotulo_2_1))]
-data_2_2 = [[rotulo_2_2[i], percentuais[i]] for i in range(len(rotulo_2_2))]
-data_3 = [[rotulo_3[i], percentuais[i]] for i in range(len(rotulo_3))]
-
-# Criar os gráficos de funil
-funnel_2_1 = create_funnel_chart(data_2_1, "Faixa 2.1")
-funnel_2_2 = create_funnel_chart(data_2_2, "Faixa 2.2")
-funnel_3 = create_funnel_chart(data_3, "Faixa 3")
-
-# Renderizar os gráficos como HTML
-funnel_2_1_html = funnel_2_1.render_embed()
-funnel_2_2_html = funnel_2_2.render_embed()
-funnel_3_html = funnel_3.render_embed()
-
-# Exibir os gráficos um embaixo do outro no Streamlit
-st.title('Gráficos de Funil')
-
-# Centralizar os gráficos
-st.markdown(
-    """
-    <style>
-    .centered {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0 auto;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-st.markdown('<div class="centered">', unsafe_allow_html=True)
-
-components.html(funnel_2_1_html, height=600, width=1000)
-components.html(funnel_2_2_html, height=600, width=1000)
-components.html(funnel_3_html, height=600, width=1000)
+st.table(funil)
